@@ -1371,13 +1371,19 @@ function removePosition(name) {
 
 // ==================== 页面加载 ====================
 window.addEventListener('load', () => {
-    const hasConfig = localStorage.getItem('supabaseConfig');
+    // 预设 Supabase 配置
+    const defaultConfig = {
+        url: 'https://hdlkqsalisbfwjpezbtl.supabase.co',  // ← 改成你的 Project URL
+        key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkbGtxc2FsaXNiZndqcGV6YnRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAxMzA3MjksImV4cCI6MjA4NTcwNjcyOX0.eRQ8UpleoVuEpLRb1VxBUxlTjiR_i3QC5KH7NeIhBG8'  // ← 改成你的 anon key
+    };
     
+    // 如果本地没有配置，使用默认配置
+    const hasConfig = localStorage.getItem('supabaseConfig');
     if (!hasConfig) {
-        showConfigContainer();
-    } else {
-        initializeSupabase();
+        localStorage.setItem('supabaseConfig', JSON.stringify(defaultConfig));
     }
+    
+    initializeSupabase();
 });
 </script>
 
